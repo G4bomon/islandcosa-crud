@@ -21,18 +21,53 @@ async function Fullarticle({ params }: Props) {
   }
 
   return (
-    <div key={article._id} className="border p-4 rounded-lg">
-      <h2 className="text-xl font-bold">{article.title}</h2>
-      <p className="text-sm text-gray-500">{article.content}</p>
-      <Badge>{article.category}</Badge>
-      <img src={article.image} alt="" />
-      <iframe width="560" height="315" src={article.youtube} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
-      {article.tiktok && <TikTokEmbed url={article.tiktok} />}
-      <p className="text-sm text-gray-500">Author: {article.author}</p>
-      <Link href={`/view/${article._id}/edit?title=${article.title}&content=${article.content}&category=${article.category}&image=${article.image}&youtube=${article.youtube}&tiktok=${article.tiktok}`}>
-        <Button>Editar</Button>
-      </Link>
-      <Deletebutton articleId={article._id.toString()}  />
+
+    <div className="max-w-4xl mx-auto mt-8 p-6 bg-white shadow-lg rounded-lg">
+
+      <h2 className="text-2xl font-bold text-red-800 mb-4">ESTE NO LO HICIMOOS EN FIGMA AUN</h2>
+      
+      <h2 className="text-2xl font-bold text-gray-800 mb-4">{article.title}</h2>
+      <p className="text-sm text-gray-600 mb-6">{article.content}</p>
+
+      <div className="flex items-center gap-2 mb-6">
+        <Badge className="text-sm px-2 py-1 bg-blue-100 text-blue-800">{article.category}</Badge>
+        <span className="text-sm text-gray-500">Author: {article.author}</span>
+      </div>
+
+      {article.image && (
+        <img
+          src={article.image}
+          alt="Article Image"
+          className="w-full max-h-96 object-cover rounded-lg mb-6"
+        />
+      )}
+
+      {article.youtube && (
+        <iframe
+          className="w-full aspect-video rounded-lg mb-6"
+          src={article.youtube}
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
+          allowFullScreen
+        ></iframe>
+      )}
+
+      {article.tiktok && (
+        <div className="mb-6">
+          <TikTokEmbed url={article.tiktok} />
+        </div>
+      )}
+
+      <div className="flex justify-between items-center">
+        <Link
+          href={`/view/${article._id}/edit?title=${article.title}&content=${article.content}&category=${article.category}&image=${article.image}&youtube=${article.youtube}&tiktok=${article.tiktok}`}
+        >
+          <Button className="bg-blue-500 hover:bg-blue-600 text-white">Editar</Button>
+        </Link>
+        <Deletebutton articleId={article._id.toString()} />
+      </div>
     </div>
   );
 }
