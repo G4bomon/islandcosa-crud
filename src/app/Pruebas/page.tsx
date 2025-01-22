@@ -9,16 +9,25 @@ async function PruebaPage() {
   // Obtener todas las noticias de la base de datos
   const newsArticles = await News.find({});
 
+  // Filtrar solo los artículos que tengan un TikTok
+  const tiktokClipsData = newsArticles
+    .filter((article) => article.tiktok)
+    .map((article) => ({
+      _id: article._id,
+      tiktok: article.tiktok,
+    }));
+
   // Retornar la página con el componente NewsList
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Prueba - Filtro de Noticias</h1>
       <p className="text-gray-600 mb-6">
-        Bienvenido a la página de prueba donde puedes ver las noticias filtradas.
+        Bienvenido a NiceTrip
       </p>
 
-      {/* Aquí mostramos el componente NewsList pasando las noticias */}
-      <NewsList newsArticles={newsArticles} />
+      {/* Aquí mostramos el componente NewsList pasando las noticias y los clips de TikTok */}
+      <NewsList newsArticles={newsArticles} tiktokClipsData={tiktokClipsData} />
+      
     </div>
   );
 }

@@ -93,6 +93,8 @@ function Fullarticle() {
                     <SelectItem value="Hotel">Hotel</SelectItem>
                     <SelectItem value="Actividad">Actividades</SelectItem>
                     <SelectItem value="Fiesta">Fiesta</SelectItem>
+                    <SelectItem value="Comida">Comida</SelectItem>
+                    <SelectItem value="Arte">Arte y cultura</SelectItem>
                     </SelectContent>
                 </Select>
                 </div>
