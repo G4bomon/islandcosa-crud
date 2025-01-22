@@ -1,18 +1,28 @@
-"use client";
+// app/Prueba/tiktok.tsx
+import { connectDB } from "@/libs/mongodb";
+import News from "@/models/news";
 import Carousel from "@/components/Carousel";
 import TikTokEmbed from "@/components/TikTokEmbed";
 
-interface TikTokClip {
-  _id: string;
-  tiktok: string; // URL del TikTok
-}
+const TikTokCarousel: React.FC = async () => {
+  await connectDB();
 
-const TikTokCarousel: React.FC<{ tiktokClips: TikTokClip[] }> = ({ tiktokClips }) => {
+  // Obtener todas las noticias de la base de datos
+  const newsArticles = await News.find({});
+
+  // Filtrar solo los artículos que tengan un TikTok
+  const tiktokClipsData = newsArticles
+    .filter((article) => article.tiktok)
+    .map((article) => ({
+      _id: article._id,
+      tiktok: article.tiktok,
+    }));
+
   return (
     <div className="pt-8">
       {/* Carrusel de TikToks */}
       <Carousel>
-        {tiktokClips.map((clip) => (
+        {tiktokClipsData.map((clip) => (
           <div key={clip._id} className="p-4">
             <TikTokEmbed url={clip.tiktok} />
           </div>

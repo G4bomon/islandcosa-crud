@@ -1,11 +1,11 @@
+// NewsList.tsx
 "use client";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import Carousel from "@/components/Carousel";
-import TikTokCarousel from "@/components/Tiktok"
 
-const NewsList: React.FC<{ newsArticles: any[], tiktokClipsData: any[] }> = ({ newsArticles, tiktokClipsData }) => {
+const NewsList: React.FC<{ newsArticles: any[] }> = ({ newsArticles }) => {
   const [categoryFilter, setCategoryFilter] = useState<string>("All");
 
   // Obtener las categorías únicas
@@ -56,13 +56,8 @@ const NewsList: React.FC<{ newsArticles: any[], tiktokClipsData: any[] }> = ({ n
           </Link>
         ))}
       </Carousel>
-
-      {/* Carrusel de TikTok */}
-      <TikTokCarousel tiktokClips={tiktokClipsData} />
-      
     </div>
   );
 };
-
 
 export default NewsList;
