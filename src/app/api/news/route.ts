@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   try {
     await connectDB();
-    const { title, content, category, image, youtube, tiktok } = await request.json();
+    var { title, content, category, image, youtube, tiktok } = await request.json();
     
     const titleFound = await News.findOne({ title });
 
@@ -37,6 +37,14 @@ export async function POST(request: Request) {
         {message: "El articulo debe tener al menos una imagen"},
         {status: 400}
       );
+
+      if (!youtube) {
+        youtube = "https://www.youtube.com/embed/2LDFPNbGN4c?si=_zwsApSxtO3I6fjq";
+      }
+
+      if (!tiktok) {
+        tiktok= "https://www.tiktok.com/@eslaguairaenfotos/video/7295160180453428485?q=la%20guaira%20video%20promocional&t=1737602407216";
+      }
 
 
     const news = new News({

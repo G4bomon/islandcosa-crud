@@ -23,6 +23,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { useParams, useSearchParams } from "next/navigation";
 import { FormEvent, useState } from "react";
 import axios, { AxiosError } from "axios";
+import { useRouter } from 'next/navigation';
 
 
 
@@ -31,6 +32,7 @@ function Fullarticle() {
     const [error, setError] = useState<string | null>(null); 
     const params = useParams();
     const searchParams = useSearchParams();
+    const router = useRouter();
 
     const _id = params._id;
     const title = searchParams.get("title") || "";
@@ -55,6 +57,7 @@ function Fullarticle() {
           tiktok: formdata.get('tiktok')
         });
         console.log(Newsres);
+        router.push('/');
       } catch (error) {
         console.log(error);
         if (error instanceof AxiosError) {
